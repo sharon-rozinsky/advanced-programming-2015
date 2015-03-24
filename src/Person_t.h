@@ -2,6 +2,9 @@
 
 using namespace std;
 
+#ifndef PERSON_T_H_
+#define PERSON_T_H_
+
 class Person_t {
 	public:
 		// Ctor's
@@ -22,4 +25,7 @@ class Person_t {
 		string			m_name;		// person name
 		int				m_age;		// person age
 		static int		m_globID;	// used to calculate m_id
-	};
+};
+
+
+#endif /* PERSON_T_H_ */
