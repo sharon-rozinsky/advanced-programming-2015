@@ -33,4 +33,14 @@ void PersonArray_t::leftShiftArray(int index)
 Person_t* PersonArray_t::removeElement(const Person_t person)
 {
 	int index = findIndex(person);
+	if (index == -1) // preson not found.
+	{
+		return 0;
+	}
+
+	Person_t* removedPersonPtr = &(m_array[index]);
+
+	//Remove pointer to person and align the array (no delete!).
+
+
 }
