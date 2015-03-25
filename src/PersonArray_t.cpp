@@ -4,7 +4,7 @@
 
 PersonArray_t::PersonArray_t()
 {
-	m_array 		= new Person_t[DEFAULT_EXPAND_VALUE];
+	m_array 		= new Person_t*[DEFAULT_EXPAND_VALUE];
 	m_expandValue 	= DEFAULT_EXPAND_VALUE;
 	m_capacity 		= DEFAULT_EXPAND_VALUE;
 	m_currentSize 	= 0;
@@ -13,14 +13,14 @@ PersonArray_t::PersonArray_t()
 PersonArray_t::PersonArray_t(int initialValue)
 {
 	m_capacity 		= initialValue;
-	m_array 		= new Person_t[m_capacity];
+	m_array 		= new Person_t*[m_capacity];
 	m_expandValue 	= DEFAULT_EXPAND_VALUE;
 	m_currentSize 	= 0;
 }
 
 PersonArray_t::PersonArray_t(int initialValue, int expandValue, int capacity)
 {
-	m_array 		= new Person_t[initialValue];
+	m_array 		= new Person_t*[initialValue];
 	m_expandValue 	= expandValue;
 	m_capacity 		= capacity;
 	m_currentSize 	= 0;
@@ -42,7 +42,7 @@ void PersonArray_t::insertNewElement(Person_t person)
 	if(isAllocationNeeded())
 		expandArray();
 
-	m_array[m_currentSize] = person;
+	m_array[m_currentSize] = &person;
 	m_currentSize++;
 }
 
@@ -65,7 +65,7 @@ Person_t* PersonArray_t::findElement(const Person_t person)
 	int indexInArray = findIndex(person);
 
 	if(indexInArray >= 0)
-		return m_array[index];
+		return m_array[indexInArray];
 	return 0;
 }
 
@@ -100,11 +100,20 @@ Person_t* PersonArray_t::removeElement(const Person_t person)
 		return 0;
 	}
 
-	Person_t* removedPersonPtr = &(m_array[index]);
+	Person_t* removedPersonPtr = m_array[index];
 
 	//Remove pointer to person and align the array (no delete!).
+	m_array[index] = NULL;
+	leftShiftArray(index);
+	m_currentSize--;
 
+	//de allocate if needed.
+	if (isDeAllocationNeeded())
+	{
+		deAllocate;
+	}
 
+	return removedPersonPtr;
 }
 
 

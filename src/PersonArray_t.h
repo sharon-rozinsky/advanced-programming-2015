@@ -41,7 +41,7 @@ class PersonArray_t {
 		int m_initialValue;
 		const int DEFAULT_EXPAND_VALUE = 15;
 
-		Person_t* m_array;
+		Person_t** m_array;
 
 		PersonArray_t(const PersonArray_t& obj);
 
@@ -51,6 +51,7 @@ class PersonArray_t {
 		void reAllocate();
 		void deAllocate();
 		bool isAllocationNeeded();
+		bool isDeAllocationNeeded();
 		int findIndex(const Person_t person);
 };
 
