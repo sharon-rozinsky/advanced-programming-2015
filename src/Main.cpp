@@ -8,10 +8,12 @@
 
 #include <iostream>
 #include "Person_t.h"
+
 using namespace std;
 
 int main() {
 	Person_t p("moshe cohen", 50);
 	cout << p.toString();
+	getchar();
 	return 0;
 }
