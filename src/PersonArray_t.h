@@ -15,7 +15,8 @@ class PersonArray_t {
 		// Ctor's
 		PersonArray_t();
 		PersonArray_t(int initialValue);
-		PersonArray_t(const PersonArray_t& obj);
+		PersonArray_t(int initialValue, int expandValue, int capcity);
+		~PersonArray_t();
 
 		// Accessors
 		int getCapacity();
@@ -37,14 +38,16 @@ class PersonArray_t {
 		int m_expandValue;
 		int m_capacity;
 		int m_currentSize;
-		int m_initialValue;
+		const int DEFAULT_EXPAND_VALUE = 15;
 
 		Person_t* m_array;
 
+		PersonArray_t(const PersonArray_t& obj);
+
 		void rightShiftArray(int index);
 		void leftShiftArray(int index);
-		void reAllocate(int size);
-		void deAllocate(int size);
+		void reAllocate();
+		void deAllocate();
 		bool isAllocationNeeded();
 };
 
