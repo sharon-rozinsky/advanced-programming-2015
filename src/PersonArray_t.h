@@ -27,7 +27,7 @@ class PersonArray_t {
 		Person_t* getFirstElement();
 		Person_t* getLastElement();
 		Person_t* findElement(Person_t person);
-		Person_t* removeElement(Person_t person);
+		Person_t* removeElement(const Person_t person);
 		void removeAll();
 		void removeAndDelete(Person_t person);
 		void removeAndDeleteAll();
@@ -38,6 +38,7 @@ class PersonArray_t {
 		int m_expandValue;
 		int m_capacity;
 		int m_currentSize;
+		int m_initialValue;
 		const int DEFAULT_EXPAND_VALUE = 15;
 
 		Person_t* m_array;
@@ -49,6 +50,7 @@ class PersonArray_t {
 		void reAllocate();
 		void deAllocate();
 		bool isAllocationNeeded();
+		int findIndex(const Person_t person);
 };
 
 
