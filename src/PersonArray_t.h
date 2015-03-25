@@ -26,7 +26,7 @@ class PersonArray_t {
 		void insertNewElement(Person_t person);
 		Person_t* getFirstElement();
 		Person_t* getLastElement();
-		Person_t* findElement(Person_t person);
+		Person_t* findElement(const Person_t person);
 		Person_t* removeElement(const Person_t person);
 		void removeAll();
 		void removeAndDelete(Person_t person);
@@ -45,6 +45,7 @@ class PersonArray_t {
 
 		PersonArray_t(const PersonArray_t& obj);
 
+		void expandArray();
 		void rightShiftArray(int index);
 		void leftShiftArray(int index);
 		void reAllocate();
