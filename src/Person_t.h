@@ -8,6 +8,7 @@ using namespace std;
 class Person_t {
 	public:
 		// Ctor's
+		Person_t();
 		Person_t(string name, int age);
 
 		// Accessors

@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+Person_t::Person_t()
+{
+}
+
 Person_t::Person_t(string name, int age)
 {
 	m_name = name;

@@ -13,7 +13,7 @@
 class PersonArray_t {
 	public:
 		// Ctor's
-		PersonArray_t(int expandValue);
+		PersonArray_t(int initialValue);
 
 		// Accessors
 		int getCapacity();
@@ -34,8 +34,13 @@ class PersonArray_t {
 	private:
 		int m_expandValue;
 		int m_capacity;
+		int m_currentSize;
+		int m_initialValue;
 
-		Person_t* m_persons;
+		Person_t* m_array;
+
+		void rightShiftArray(int index);
+		void leftShiftArray(int index);
 };
 
 
