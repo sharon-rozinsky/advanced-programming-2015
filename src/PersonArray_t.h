@@ -13,7 +13,9 @@
 class PersonArray_t {
 	public:
 		// Ctor's
+		PersonArray_t();
 		PersonArray_t(int initialValue);
+		PersonArray_t(const PersonArray_t& obj);
 
 		// Accessors
 		int getCapacity();
@@ -41,6 +43,9 @@ class PersonArray_t {
 
 		void rightShiftArray(int index);
 		void leftShiftArray(int index);
+		void reAllocate(int size);
+		void deAllocate(int size);
+		bool isAllocationNeeded();
 };
 
 
