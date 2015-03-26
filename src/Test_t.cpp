@@ -27,7 +27,20 @@ void Test_t::insert(string name, int age)
 void Test_t::remove(string name, int age)
 {
 	Person_t* person = new Person_t(name, age);
+	arr->removeElement(person);
+	cout << "Removed person!" << endl;
+}
+
+void Test_t::removeAndDelete(string name, int age)
+{
+	Person_t* person = new Person_t(name, age);
 	arr->removeAndDelete(person);
+	cout << "Removed and deleted person!" << endl;
+}
+
+void Test_t::removeAndDeleteAll()
+{
+	arr->removeAndDeleteAll();
 	cout << "Removed person!" << endl;
 }
 

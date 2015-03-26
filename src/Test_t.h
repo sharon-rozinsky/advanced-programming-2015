@@ -15,6 +15,9 @@ public:
 	void 	getLastPerson();
 	void	find(string name, int age);
 	void	remove(string name, int age);
+	void	removeAndDelete(string name, int age);
+	void 	removeAll();
+	void	removeAndDeleteAll();
 	void	print();
 public:
 	PersonArray_t* arr;

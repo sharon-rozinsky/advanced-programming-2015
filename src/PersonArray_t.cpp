@@ -230,7 +230,7 @@ int PersonArray_t::findIndex(const Person_t* person)
 {
 	for(int i = 0; i < m_currentSize; i++)
 	{
-		if(m_array[i] == person)
+		if(*m_array[i] == *person)
 			return i;
 	}
 	return -1;

@@ -20,6 +20,7 @@ class Person_t {
 		// Class Methods
 		string toString();
 
+		bool operator==(const Person_t &other);
 
 	private:
 		const size_t 	m_id = m_globID;		// Unique for each Person_t object

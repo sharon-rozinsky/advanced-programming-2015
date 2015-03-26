@@ -27,5 +27,13 @@ string Person_t::toString()
 	return "name: " + m_name + ", age: " + to_string(m_age);
 }
 
+bool Person_t::operator==(const Person_t &other)
+{
+	if(this->m_age == other.m_age && strcmp(this->m_name.c_str(), other.m_name.c_str()) == 0)
+	{
+		return true;
+	}
+	return false;
+}
 
 
