@@ -22,7 +22,7 @@ class Person_t {
 
 
 	private:
-		const size_t 	m_id=1;		// Unique for each Person_t object
+		const size_t 	m_id = m_globID;		// Unique for each Person_t object
 		string			m_name;		// person name
 		int				m_age;		// person age
 		static int		m_globID;	// used to calculate m_id

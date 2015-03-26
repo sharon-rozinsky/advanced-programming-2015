@@ -26,13 +26,13 @@ class PersonArray_t {
 		void insertNewElement(Person_t person);
 		Person_t* getFirstElement();
 		Person_t* getLastElement();
-		Person_t* findElement(const Person_t person);
-		Person_t* removeElement(const Person_t person);
+		Person_t* findElement(const Person_t* person);
+		Person_t* removeElement(const Person_t* person);
 		void removeAll();
-		void removeAndDelete(Person_t person);
+		void removeAndDelete(Person_t* person);
 		void removeAndDeleteAll();
-		int append(int index, Person_t person);
-		int prepend(int index, Person_t person);
+		int append(const int index, Person_t* person);
+		int prepend(const int index, Person_t* person);
 
 	private:
 		int m_expandValue;
@@ -43,16 +43,18 @@ class PersonArray_t {
 
 		Person_t** m_array;
 
+		// Private copy constructor to prevent copy of PersonArray_t objects.
 		PersonArray_t(const PersonArray_t& obj);
 
-		void expandArray();
+		 // Private class methods
 		void rightShiftArray(int index);
 		void leftShiftArray(int index);
 		void reAllocate();
 		void deAllocate();
+		void updateNewAllocatedArray(Person_t** newArray);
 		bool isAllocationNeeded();
 		bool isDeAllocationNeeded();
-		int findIndex(const Person_t person);
+		int findIndex(const Person_t* person);
 };
 
 

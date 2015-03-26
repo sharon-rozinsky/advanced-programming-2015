@@ -8,14 +8,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int Person_t::m_globID = 1;
+
 Person_t::Person_t()
 {
+	m_globID++;
 }
 
 Person_t::Person_t(string name, int age)
 {
 	m_name = name;
 	m_age = age;
+	m_globID++;
 }
 
 string Person_t::toString()

@@ -36,11 +36,40 @@ int PersonArray_t::getCapacity()
 	return m_capacity;
 }
 
+void PersonArray_t::reAllocate()
+{
+	//allocate new memory
+	Person_t** newArray = new Person_t*[m_capacity + m_expandValue];
+	updateNewAllocatedArray(newArray);
+	m_capacity += m_expandValue;
+}
+
+void PersonArray_t::deAllocate()
+{
+	int newSize = ((int)(m_currentSize / m_expandValue) + 1) * m_expandValue;
+	Person_t** newArray = new Person_t*[newSize];
+	updateNewAllocatedArray(newArray);
+	m_capacity = newSize;
+}
+
+void PersonArray_t::updateNewAllocatedArray(Person_t** newArray)
+{
+	//copy element to new memory
+	for (int i = 0; i < m_currentSize; i++)
+	{
+		newArray[i] = m_array[i];
+	}
+
+	//delete old memory and update m_array.
+	delete[] m_array;
+	m_array = newArray;
+}
+
 void PersonArray_t::insertNewElement(Person_t person)
 {
 	// TODO: should we check if the person object is already in the array?
 	if(isAllocationNeeded())
-		expandArray();
+		reAllocate();
 
 	m_array[m_currentSize] = &person;
 	m_currentSize++;
@@ -60,7 +89,7 @@ Person_t* PersonArray_t::getLastElement()
 	return NULL;
 }
 
-Person_t* PersonArray_t::findElement(const Person_t person)
+Person_t* PersonArray_t::findElement(const Person_t* person)
 {
 	int indexInArray = findIndex(person);
 
@@ -91,7 +120,7 @@ void PersonArray_t::leftShiftArray(int index)
 	}
 }
 
-Person_t* PersonArray_t::removeElement(const Person_t person)
+Person_t* PersonArray_t::removeElement(const Person_t* person)
 {
 	int index = findIndex(person);
 
@@ -105,19 +134,98 @@ Person_t* PersonArray_t::removeElement(const Person_t person)
 	//Remove pointer to person and align the array (no delete!).
 	m_array[index] = NULL;
 	leftShiftArray(index);
+
 	m_currentSize--;
 
 	//de allocate if needed.
 	if (isDeAllocationNeeded())
 	{
-		deAllocate;
+		deAllocate();
 	}
 
 	return removedPersonPtr;
 }
 
+void PersonArray_t::removeAll()
+{
+	for (int i = 0; i < m_currentSize; i++)
+	{
+		m_array[i] = NULL;
+	}
 
-int PersonArray_t::findIndex(const Person_t person)
+	m_currentSize = 0;
+
+	//de allocate if needed.
+	if (isDeAllocationNeeded())
+	{
+		deAllocate();
+	}
+	
+	//Here we always got an empty array with init capacity. 
+}
+
+void PersonArray_t::removeAndDelete(Person_t* person)
+{
+	removeElement(person);
+	delete(person);
+
+	m_currentSize--;
+
+	//de allocate if needed.
+	if (isDeAllocationNeeded())
+	{
+		deAllocate();
+	}
+}
+
+
+void PersonArray_t::removeAndDeleteAll()
+{
+	// Note: hence we use array of pointers, the use of delete[] will not work!.
+	for (int i = 0; i < m_currentSize; i++)
+	{
+		removeElement(m_array[i]);
+		delete(m_array[i]);
+	}
+
+	m_currentSize = 0;
+
+	//de allocate if needed.
+	if (isDeAllocationNeeded())
+	{
+		deAllocate();
+	}
+}
+
+int  PersonArray_t::append(const int index, Person_t* person)
+{
+	if ((person == NULL) || (index < 0) || (index >= m_currentSize))
+	{
+		return 0;
+	}
+
+	rightShiftArray(index + 1);
+	m_array[index] = person;
+	m_currentSize++;
+
+	return 1;
+}
+
+int  PersonArray_t::prepend(const int index, Person_t* person)
+{
+	if ((person == NULL) || (index < 0) || (index >= m_currentSize))
+	{
+		return 0;
+	}
+
+	rightShiftArray(index);
+	m_array[index] = person;
+	m_currentSize++;
+
+	return 1;
+}
+
+int PersonArray_t::findIndex(const Person_t* person)
 {
 	for(int i = 0; i < m_currentSize; i++)
 	{
@@ -125,4 +233,28 @@ int PersonArray_t::findIndex(const Person_t person)
 			return i;
 	}
 	return -1;
+}
+
+bool PersonArray_t::isAllocationNeeded()
+{
+	if ((m_currentSize + 1) > m_capacity)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool PersonArray_t::isDeAllocationNeeded()
+{
+	if (m_currentSize < (m_capacity - m_expandValue))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
