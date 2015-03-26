@@ -106,9 +106,9 @@ void PersonArray_t::rightShiftArray(int index)
 		reAllocate();
 	}
 
-	for (int i = m_currentSize; i >= index; i--)
+	for (int i = m_currentSize - 1; i >= index; i--)
 	{
-		m_array[i + 1] = m_array[i]; // i + 1 index is inside the array capacity due to the pre reallocation process.
+		m_array[i] = m_array[i-1]; // i + 1 index is inside the array capacity due to the pre reallocation process.
 	}
 }
 
@@ -205,9 +205,9 @@ int  PersonArray_t::append(const int index, Person_t* person)
 		return 0;
 	}
 
-	rightShiftArray(index + 1);
-	m_array[index] = person;
 	m_currentSize++;
+	rightShiftArray(index + 2);
+	m_array[index+1] = person;
 
 	return 1;
 }
@@ -219,9 +219,9 @@ int  PersonArray_t::prepend(const int index, Person_t* person)
 		return 0;
 	}
 
-	rightShiftArray(index);
-	m_array[index] = person;
 	m_currentSize++;
+	rightShiftArray(index + 1);
+	m_array[index] = person;
 
 	return 1;
 }
