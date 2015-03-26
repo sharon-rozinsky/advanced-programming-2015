@@ -6,16 +6,19 @@
  */
 
 #include "Person_t.h"
+#include <iostream>
+using namespace std;
 
 #ifndef PERSONARRAY_T_H_
 #define PERSONARRAY_T_H_
+
 
 class PersonArray_t {
 	public:
 		// Ctor's
 		PersonArray_t();
 		PersonArray_t(int initialValue);
-		PersonArray_t(int initialValue, int expandValue, int capcity);
+		PersonArray_t(int initialValue, int expandValue);
 		~PersonArray_t();
 
 		// Accessors
@@ -23,7 +26,7 @@ class PersonArray_t {
 		int getNumberOfElements();
 
 		// Class Methods
-		void insertNewElement(Person_t person);
+		void insertNewElement(Person_t* person);
 		Person_t* getFirstElement();
 		Person_t* getLastElement();
 		Person_t* findElement(const Person_t* person);
@@ -33,6 +36,7 @@ class PersonArray_t {
 		void removeAndDeleteAll();
 		int append(const int index, Person_t* person);
 		int prepend(const int index, Person_t* person);
+		void toString();
 
 	private:
 		int m_expandValue;

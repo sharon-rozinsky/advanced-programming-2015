@@ -1,6 +1,7 @@
 #include "PersonArray_t.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string>
 
 PersonArray_t::PersonArray_t()
 {
@@ -18,11 +19,11 @@ PersonArray_t::PersonArray_t(int initialValue)
 	m_currentSize 	= 0;
 }
 
-PersonArray_t::PersonArray_t(int initialValue, int expandValue, int capacity)
+PersonArray_t::PersonArray_t(int initialValue, int expandValue)
 {
 	m_array 		= new Person_t*[initialValue];
 	m_expandValue 	= expandValue;
-	m_capacity 		= capacity;
+	m_capacity 		= initialValue;
 	m_currentSize 	= 0;
 }
 
@@ -65,13 +66,13 @@ void PersonArray_t::updateNewAllocatedArray(Person_t** newArray)
 	m_array = newArray;
 }
 
-void PersonArray_t::insertNewElement(Person_t person)
+void PersonArray_t::insertNewElement(Person_t* person)
 {
 	// TODO: should we check if the person object is already in the array?
 	if(isAllocationNeeded())
 		reAllocate();
 
-	m_array[m_currentSize] = &person;
+	m_array[m_currentSize] = person;
 	m_currentSize++;
 }
 
@@ -256,5 +257,15 @@ bool PersonArray_t::isDeAllocationNeeded()
 	else
 	{
 		return false;
+	}
+}
+
+void PersonArray_t::toString()
+{
+	std::cout << "Array capacity: " << m_capacity << endl;
+	cout << "Array length: " << m_currentSize << endl;
+	for(int i = 0; i < m_currentSize; i++)
+	{
+		cout << m_array[i]->toString() << endl;
 	}
 }
