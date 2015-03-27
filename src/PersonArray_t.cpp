@@ -11,7 +11,7 @@ PersonArray_t::PersonArray_t()
 	m_currentSize 	= 0;
 }
 
-PersonArray_t::PersonArray_t(int initialValue)
+PersonArray_t::PersonArray_t(const int initialValue)
 {
 	m_capacity 		= initialValue;
 	m_array 		= new Person_t*[m_capacity];
@@ -19,12 +19,20 @@ PersonArray_t::PersonArray_t(int initialValue)
 	m_currentSize 	= 0;
 }
 
-PersonArray_t::PersonArray_t(int initialValue, int expandValue)
+PersonArray_t::PersonArray_t(const int initialValue, const int expandValue)
 {
 	m_array 		= new Person_t*[initialValue];
 	m_expandValue 	= expandValue;
 	m_capacity 		= initialValue;
 	m_currentSize 	= 0;
+}
+
+PersonArray_t::~PersonArray_t()
+{
+	for(int i = 0; i < m_currentSize; i++)
+	{
+		delete m_array[i];
+	}
 }
 
 int PersonArray_t::getNumberOfElements()
@@ -106,7 +114,7 @@ void PersonArray_t::rightShiftArray(int index)
 		reAllocate();
 	}
 
-	for (int i = m_currentSize - 1; i >= index; i--)
+	for (int i = m_currentSize; i >= index; i--)
 	{
 		m_array[i] = m_array[i-1]; // i + 1 index is inside the array capacity due to the pre reallocation process.
 	}
@@ -205,9 +213,9 @@ int  PersonArray_t::append(const int index, Person_t* person)
 		return 0;
 	}
 
-	m_currentSize++;
 	rightShiftArray(index + 2);
 	m_array[index+1] = person;
+	m_currentSize++;
 
 	return 1;
 }
@@ -219,9 +227,9 @@ int  PersonArray_t::prepend(const int index, Person_t* person)
 		return 0;
 	}
 
-	m_currentSize++;
 	rightShiftArray(index + 1);
 	m_array[index] = person;
+	m_currentSize++;
 
 	return 1;
 }
@@ -264,8 +272,22 @@ void PersonArray_t::toString()
 {
 	std::cout << "Array capacity: " << m_capacity << endl;
 	cout << "Array length: " << m_currentSize << endl;
+	cout << "[";
 	for(int i = 0; i < m_currentSize; i++)
 	{
-		cout << m_array[i]->toString() << endl;
+		if (i + 1 != m_currentSize)
+			cout << m_array[i]->toString() << ", ";
+		else
+			cout << m_array[i]->toString();
 	}
+	cout << "]" << endl;
+}
+
+PersonArray_t& PersonArray_t::operator=(const PersonArray_t &other)
+{
+	if (this != &other)
+	{
+		int x = 5;
+	}
+	return *this;
 }

@@ -10,14 +10,16 @@ public:
 	Test_t(int initValue);
 	Test_t(int initValue, int expandValue);
 
-	void	insert(string name, int age);
+	void	insert(Person_t* person);
 	void 	getFirstPerson();
 	void 	getLastPerson();
-	void	find(string name, int age);
-	void	remove(string name, int age);
-	void	removeAndDelete(string name, int age);
+	void	find(Person_t* person);
+	void	remove(Person_t* person);
+	void	removeAndDelete(Person_t* person);
 	void 	removeAll();
 	void	removeAndDeleteAll();
+	void	append(Person_t* person, int index);
+	void	prepend(Person_t* person, int index);
 	void	print();
 public:
 	PersonArray_t* arr;

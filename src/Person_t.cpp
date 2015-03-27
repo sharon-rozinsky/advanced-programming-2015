@@ -15,16 +15,36 @@ Person_t::Person_t()
 	m_globID++;
 }
 
-Person_t::Person_t(string name, int age)
+Person_t::Person_t(const string name, const int age)
+{
+	setName(name);
+	setAge(age);
+	m_globID++;
+}
+
+void Person_t::setName(const string name)
 {
 	m_name = name;
+}
+
+void Person_t::setAge(const int age)
+{
 	m_age = age;
-	m_globID++;
 }
 
 string Person_t::toString()
 {
-	return "name: " + m_name + ", age: " + to_string(m_age);
+	return "(" + m_name + " ; " + to_string(m_age) + ")";
+}
+
+Person_t& Person_t::operator=(const Person_t &other)
+{
+	if (this != &other)
+	{
+		Person_t* result = new Person_t(this->m_name, this->m_age);
+		return *result;
+	}
+	return *this;
 }
 
 bool Person_t::operator==(const Person_t &other)

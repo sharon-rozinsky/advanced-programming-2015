@@ -8,25 +8,27 @@ using namespace std;
 class Person_t {
 	public:
 		// Ctor's
-		Person_t();
-		Person_t(string name, int age);
+		Person_t		();
+		Person_t		(const string name, const int age);
 
 		// Accessors
-		void setName(string name);
-		void setAge();
-		string getName();
-		string getAge();
+		void setName	(const string name);
+		void setAge		(const int age);
+		string getName	();
+		string getAge	();
 
 		// Class Methods
-		string toString();
+		string toString	();
 
+		// Operators
+		Person_t& operator=(const Person_t &other);
 		bool operator==(const Person_t &other);
 
 	private:
 		const size_t 	m_id = m_globID;		// Unique for each Person_t object
-		string			m_name;		// person name
-		int				m_age;		// person age
-		static int		m_globID;	// used to calculate m_id
+		string			m_name;					// person name
+		int				m_age;					// person age
+		static int		m_globID;				// used to calculate m_id
 };
 
 

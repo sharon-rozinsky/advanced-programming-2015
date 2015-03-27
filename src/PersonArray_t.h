@@ -17,8 +17,8 @@ class PersonArray_t {
 	public:
 		// Ctor's
 		PersonArray_t();
-		PersonArray_t(int initialValue);
-		PersonArray_t(int initialValue, int expandValue);
+		PersonArray_t(const int initialValue);
+		PersonArray_t(const int initialValue, const int expandValue);
 		~PersonArray_t();
 
 		// Accessors
@@ -26,39 +26,40 @@ class PersonArray_t {
 		int getNumberOfElements();
 
 		// Class Methods
-		void insertNewElement(Person_t* person);
-		Person_t* getFirstElement();
-		Person_t* getLastElement();
-		Person_t* findElement(const Person_t* person);
-		Person_t* removeElement(const Person_t* person);
-		void removeAll();
-		void removeAndDelete(Person_t* person);
-		void removeAndDeleteAll();
-		int append(const int index, Person_t* person);
-		int prepend(const int index, Person_t* person);
+		void insertNewElement		(Person_t* person);
+		Person_t* getFirstElement	();
+		Person_t* getLastElement	();
+		Person_t* findElement		(const Person_t* person);
+		Person_t* removeElement		(const Person_t* person);
+		void removeAll				();
+		void removeAndDelete		(Person_t* person);
+		void removeAndDeleteAll		();
+		int append					(const int index, Person_t* person);
+		int prepend					(const int index, Person_t* person);
 		void toString();
 
 	private:
-		int m_expandValue;
-		int m_capacity;
-		int m_currentSize;
-		int m_initialValue;
-		const int DEFAULT_EXPAND_VALUE = 15;
+		int			m_expandValue;
+		int			m_capacity;
+		int			m_currentSize;
+		int			m_initialValue;
+		const int	DEFAULT_EXPAND_VALUE = 15;
 
-		Person_t** m_array;
+		Person_t**	m_array;
 
 		// Private copy constructor to prevent copy of PersonArray_t objects.
 		PersonArray_t(const PersonArray_t& obj);
+		PersonArray_t& operator=(const PersonArray_t &other);
 
 		 // Private class methods
-		void rightShiftArray(int index);
-		void leftShiftArray(int index);
-		void reAllocate();
-		void deAllocate();
-		void updateNewAllocatedArray(Person_t** newArray);
-		bool isAllocationNeeded();
-		bool isDeAllocationNeeded();
-		int findIndex(const Person_t* person);
+		void rightShiftArray			(int index);
+		void leftShiftArray				(int index);
+		void reAllocate					();
+		void deAllocate					();
+		void updateNewAllocatedArray	(Person_t** newArray);
+		bool isAllocationNeeded			();
+		bool isDeAllocationNeeded		();
+		int findIndex					(const Person_t* person);
 };
 
 
