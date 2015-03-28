@@ -12,10 +12,10 @@ class Person_t {
 		Person_t		(const string name, const int age);
 
 		// Accessors
-		void setName	(const string name);
-		void setAge		(const int age);
-		string getName	();
-		string getAge	();
+		void setName		(const string name);
+		void setAge			(const int age);
+		string getName		() const;
+		int	 getAge			()const;
 
 		// Class Methods
 		string toString	();

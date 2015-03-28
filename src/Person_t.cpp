@@ -32,6 +32,16 @@ void Person_t::setAge(const int age)
 	m_age = age;
 }
 
+string Person_t::getName() const
+{
+	return m_name;
+}
+
+int Person_t::getAge() const
+{
+	return m_age;
+}
+
 string Person_t::toString()
 {
 	return "(" + m_name + " ; " + to_string(m_age) + ")";
@@ -41,7 +51,7 @@ Person_t& Person_t::operator=(const Person_t &other)
 {
 	if (this != &other)
 	{
-		Person_t* result = new Person_t(this->m_name, this->m_age);
+		Person_t* result = new Person_t(other.getName(), other.getAge());
 		return *result;
 	}
 	return *this;
