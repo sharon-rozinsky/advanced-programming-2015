@@ -178,8 +178,6 @@ void PersonArray_t::removeAndDelete(Person_t* person)
 	removeElement(person);
 	delete(person);
 
-	m_currentSize--;
-
 	//de allocate if needed.
 	if (isDeAllocationNeeded())
 	{
@@ -190,11 +188,11 @@ void PersonArray_t::removeAndDelete(Person_t* person)
 
 void PersonArray_t::removeAndDeleteAll()
 {
+	int size = m_currentSize;
 	// Note: hence we use array of pointers, the use of delete[] will not work!.
-	for (int i = 0; i < m_currentSize; i++)
+	while (m_currentSize > 0)
 	{
-		removeElement(m_array[i]);
-		delete(m_array[i]);
+		removeAndDelete(m_array[0]);
 	}
 
 	m_currentSize = 0;
