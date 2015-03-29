@@ -175,8 +175,8 @@ void PersonArray_t::removeAll()
 
 void PersonArray_t::removeAndDelete(Person_t* person)
 {
-	removeElement(person);
-	delete(person);
+	Person_t* removedPersonPtr = removeElement(person);
+	delete(removedPersonPtr);
 
 	//de allocate if needed.
 	if (isDeAllocationNeeded())
@@ -279,13 +279,4 @@ void PersonArray_t::toString()
 			cout << m_array[i]->toString();
 	}
 	cout << "]" << endl;
-}
-
-PersonArray_t& PersonArray_t::operator=(const PersonArray_t &other)
-{
-	if (this != &other)
-	{
-		int x = 5;
-	}
-	return *this;
 }
