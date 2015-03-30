@@ -22,13 +22,13 @@ class PersonArray_t {
 		~PersonArray_t();
 
 		// Accessors
-		int getCapacity();
-		int getNumberOfElements();
+		int							getCapacity() const;
+		int							getNumberOfElements() const;
 
 		// Class Methods
 		void insertNewElement		(Person_t* const person);
-		Person_t* getFirstElement	();
-		Person_t* getLastElement	();
+		Person_t* getFirstElement	() const;
+		Person_t* getLastElement	() const;
 		Person_t* findElement		(Person_t* const person);
 		Person_t* removeElement		(Person_t* const person);
 		void removeAll				();
@@ -36,7 +36,7 @@ class PersonArray_t {
 		void removeAndDeleteAll		();
 		int append					(const unsigned int index, Person_t* const person);
 		int prepend					(const unsigned int index, Person_t* const person);
-		void toString();
+		void toString				() const;
 
 	private:
 		int			m_expandValue;

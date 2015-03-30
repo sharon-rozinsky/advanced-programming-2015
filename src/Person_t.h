@@ -18,7 +18,7 @@ class Person_t {
 		int	 getAge			() const;
 
 		// Class Methods
-		string toString	();
+		string toString		() const;
 
 		// Operators
 		Person_t& operator=(const Person_t &other);

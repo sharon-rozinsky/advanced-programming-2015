@@ -39,12 +39,12 @@ PersonArray_t::~PersonArray_t()
 	delete[] m_array;
 }
 
-int PersonArray_t::getNumberOfElements()
+int PersonArray_t::getNumberOfElements() const
 {
 	return m_currentSize;
 }
 
-int PersonArray_t::getCapacity()
+int PersonArray_t::getCapacity() const
 {
 	return m_capacity;
 }
@@ -88,14 +88,14 @@ void PersonArray_t::insertNewElement(Person_t* const person)
 	m_currentSize++;
 }
 
-Person_t* PersonArray_t::getFirstElement()
+Person_t* PersonArray_t::getFirstElement() const
 {
 	if(m_currentSize > 0)
 		return m_array[0];
 	return NULL;
 }
 
-Person_t* PersonArray_t::getLastElement()
+Person_t* PersonArray_t::getLastElement() const
 {
 	if(m_currentSize > 0)
 		return m_array[m_currentSize - 1];
@@ -273,7 +273,7 @@ bool PersonArray_t::isDeAllocationNeeded()
 	}
 }
 
-void PersonArray_t::toString()
+void PersonArray_t::toString() const
 {
 	std::cout << "Array capacity: " << m_capacity << endl;
 	cout << "Array length: " << m_currentSize << endl;

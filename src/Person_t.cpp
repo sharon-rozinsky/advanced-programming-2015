@@ -42,7 +42,7 @@ int Person_t::getAge() const
 	return m_age;
 }
 
-string Person_t::toString()
+string Person_t::toString() const
 {
 	return "(" + m_name + " ; " + to_string(m_age) + ")";
 }
