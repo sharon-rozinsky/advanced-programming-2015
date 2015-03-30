@@ -17,6 +17,11 @@ Test_t::Test_t(int initValue, int expandValue)
 	arr = new PersonArray_t(initValue, expandValue);
 }
 
+Test_t::~Test_t()
+{
+	delete arr;
+}
+
 void Test_t::insert(Person_t* person)
 {
 	arr->insertNewElement(person);

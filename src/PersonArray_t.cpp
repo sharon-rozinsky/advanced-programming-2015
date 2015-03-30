@@ -11,19 +11,21 @@ PersonArray_t::PersonArray_t()
 	m_currentSize 	= 0;
 }
 
-PersonArray_t::PersonArray_t(const int initialValue)
+PersonArray_t::PersonArray_t(const unsigned int initialValue)
 {
 	m_capacity 		= initialValue;
+	m_initialValue  = initialValue;
 	m_array 		= new Person_t*[m_capacity];
 	m_expandValue 	= DEFAULT_EXPAND_VALUE;
 	m_currentSize 	= 0;
 }
 
-PersonArray_t::PersonArray_t(const int initialValue, const int expandValue)
+PersonArray_t::PersonArray_t(const unsigned int initialValue, const int expandValue)
 {
 	m_array 		= new Person_t*[initialValue];
 	m_expandValue 	= expandValue;
 	m_capacity 		= initialValue;
+	m_initialValue  = initialValue;
 	m_currentSize 	= 0;
 }
 
@@ -33,6 +35,8 @@ PersonArray_t::~PersonArray_t()
 	{
 		delete m_array[i];
 	}
+
+	delete[] m_array;
 }
 
 int PersonArray_t::getNumberOfElements()
@@ -61,7 +65,7 @@ void PersonArray_t::deAllocate()
 	m_capacity = newSize;
 }
 
-void PersonArray_t::updateNewAllocatedArray(Person_t** newArray)
+void PersonArray_t::updateNewAllocatedArray(Person_t** const newArray)
 {
 	//copy element to new memory
 	for (int i = 0; i < m_currentSize; i++)
@@ -74,7 +78,7 @@ void PersonArray_t::updateNewAllocatedArray(Person_t** newArray)
 	m_array = newArray;
 }
 
-void PersonArray_t::insertNewElement(Person_t* person)
+void PersonArray_t::insertNewElement(Person_t* const person)
 {
 	// TODO: should we check if the person object is already in the array?
 	if(isAllocationNeeded())
@@ -98,7 +102,7 @@ Person_t* PersonArray_t::getLastElement()
 	return NULL;
 }
 
-Person_t* PersonArray_t::findElement(const Person_t* person)
+Person_t* PersonArray_t::findElement(Person_t* const person)
 {
 	int indexInArray = findIndex(person);
 
@@ -107,7 +111,7 @@ Person_t* PersonArray_t::findElement(const Person_t* person)
 	return 0;
 }
 
-void PersonArray_t::rightShiftArray(int index)
+void PersonArray_t::rightShiftArray(const unsigned int index)
 {
 	if (isAllocationNeeded())
 	{
@@ -120,16 +124,16 @@ void PersonArray_t::rightShiftArray(int index)
 	}
 }
 
-void PersonArray_t::leftShiftArray(int index)
+void PersonArray_t::leftShiftArray(const unsigned int index)
 {
 	// This function Assumes that index is null. (i.e not overuns any pointer)
-	for (int i = index; i < m_currentSize; i++)
+	for (int i = index; i < (m_currentSize-1); i++)
 	{
 		m_array[i] = m_array[i + 1];
 	}
 }
 
-Person_t* PersonArray_t::removeElement(const Person_t* person)
+Person_t* PersonArray_t::removeElement(Person_t* const person)
 {
 	int index = findIndex(person);
 
@@ -173,7 +177,7 @@ void PersonArray_t::removeAll()
 	//Here we always got an empty array with init capacity. 
 }
 
-void PersonArray_t::removeAndDelete(Person_t* person)
+void PersonArray_t::removeAndDelete(Person_t* const person)
 {
 	Person_t* removedPersonPtr = removeElement(person);
 	delete(removedPersonPtr);
@@ -204,9 +208,9 @@ void PersonArray_t::removeAndDeleteAll()
 	}
 }
 
-int  PersonArray_t::append(const int index, Person_t* person)
+int  PersonArray_t::append(const unsigned int index, Person_t* const person)
 {
-	if ((person == NULL) || (index < 0) || (index >= m_currentSize))
+	if ((person == NULL) || (index >= m_currentSize))
 	{
 		return 0;
 	}
@@ -218,9 +222,9 @@ int  PersonArray_t::append(const int index, Person_t* person)
 	return 1;
 }
 
-int  PersonArray_t::prepend(const int index, Person_t* person)
+int  PersonArray_t::prepend(const unsigned int index, Person_t* const person)
 {
-	if ((person == NULL) || (index < 0) || (index >= m_currentSize))
+	if ((person == NULL)  || (index >= m_currentSize))
 	{
 		return 0;
 	}
@@ -232,10 +236,13 @@ int  PersonArray_t::prepend(const int index, Person_t* person)
 	return 1;
 }
 
-int PersonArray_t::findIndex(const Person_t* person)
+int PersonArray_t::findIndex(Person_t* const person)
 {
+	if (person == NULL) return -1;
+
 	for(int i = 0; i < m_currentSize; i++)
 	{
+		if (m_array[i] == NULL) continue;
 		if(*m_array[i] == *person)
 			return i;
 	}

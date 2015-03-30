@@ -13,9 +13,9 @@ class Person_t {
 
 		// Accessors
 		void setName		(const string name);
-		void setAge			(const int age);
+		void setAge			(const unsigned int age);
 		string getName		() const;
-		int	 getAge			()const;
+		int	 getAge			() const;
 
 		// Class Methods
 		string toString	();

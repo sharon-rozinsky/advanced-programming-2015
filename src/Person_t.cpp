@@ -27,7 +27,7 @@ void Person_t::setName(const string name)
 	m_name = name;
 }
 
-void Person_t::setAge(const int age)
+void Person_t::setAge(const unsigned int age)
 {
 	m_age = age;
 }

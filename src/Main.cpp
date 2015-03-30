@@ -64,10 +64,14 @@ int main() {
 			test->insert(getPerson());
 			break;
 		case 2:
-			test->find(getPerson());
+			person = getPerson();
+			test->find(person);
+			delete person;
 			break;
 		case 3:
-			test->remove(getPerson());
+			person = getPerson();
+			test->remove(person);
+			delete person;
 			break;
 		case 4:
 			test->getFirstPerson();
@@ -76,7 +80,9 @@ int main() {
 			test->getLastPerson();
 			break;
 		case 6:
-			test->removeAndDelete(getPerson());
+			person = getPerson();
+			test->removeAndDelete(person);
+			delete person;
 			break;
 		case 7:
 			test->removeAll();
@@ -109,6 +115,8 @@ int main() {
 
 		cout << "----------------------------------------------" << endl;
 	}
+
+	delete test;
 
 	return 0;
 }

@@ -9,6 +9,7 @@ public:
 	Test_t();
 	Test_t(int initValue);
 	Test_t(int initValue, int expandValue);
+	~Test_t();
 
 	void	insert(Person_t* person);
 	void 	getFirstPerson();
